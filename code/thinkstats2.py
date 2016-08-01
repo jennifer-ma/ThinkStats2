@@ -2799,3 +2799,26 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+#####################
+# Jennifer
+def BiasedPmf(pmf, label):
+    pmf_copy = pmf.Copy(label=label)
+
+    for x, p in pmf.Items():
+        pmf_copy.Mult(x, x)
+
+    pmf_copy.Normalize()
+
+    return pmf_copy
+
+def UnbiasedPmf(pmf, label):
+    pmf_copy = pmf.Copy(label=label)
+
+    for x, p in pmf.Items():
+        pmf_copy.Mult(x, 1.0 / x) # only difference from BiasedPmf: changed 2nd "x" to 1.0/x, so it divides instead
+
+    pmf_copy.Normalize()
+
+    return pmf_copy
